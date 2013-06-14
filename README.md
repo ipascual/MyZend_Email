@@ -1,11 +1,11 @@
 MyZend / Email
 =======
-Version 0.0.1 Created by Ignacio Pascual
+Version 0.9
 
 Introduction
 ------------
 
-Email is a module to manage the process of sending emails with templates.
+MyZend Email is a ZF2 module to manage the process of sending emails with templates.
 
 It encapsulates Zend\Mail\Message to keep it a simple use.
 
@@ -14,35 +14,40 @@ Install
 Every module will have its own email templates.
 
 Add these to your module/YourModule/config/module.config.php
+```
 	'email' => array(
 		"template_path_stack" => array(
 				__DIR__ . "/../view/email/"
 		),
 	),
-
+```
 Add this structure to you module module/YourModule/view/email
+```	
 	/html/your-module/*
 	/subject/your-module/*
 	/txt/your-module/*
-	                  
+```	                  
 
 Examples
 ------------
-
-<?php
+```
 /*
  * Basic use
  */
 $email = $this->email->create();
 $email->addTo("ignacio@yourproject.net", "Ignacio Pascual");
 $this->email->send($email);
+```
 
+```
 /*
  * Admin mail
  */
 $email = $this->email->create(array("html_content" => "this is a notice", "subject" => "error"));
 $this->email->send($email);
+```
 
+```
 /*
  * Using template variables
  */
@@ -53,7 +58,9 @@ $email = $this->email->create(array(
 $email->setTemplateName("welcome");
 $email->addTo("ignacio@yourproject.net", "Ignacio Pascual");
 $this->email->send($email);
+```
 
+```
 /**
  * Without templates
  */
@@ -63,7 +70,9 @@ $email->setTextContent("Hi, this is a test!");
 $email->setHtmlContent("<h1>Hi,</h1> <p>this is a test!</p>");
 $email->addTo("ignacio@yourproject.net", "Ignacio Pascual");
 $this->email->send($email);
+```
 
+```
 /*
  * Optional arguments
  */
@@ -88,8 +97,8 @@ $email->addCc("copy@example.com", "Mr. Copy Recipient");
 $email->addBcc("other-copy@example.com", "Mr.Not Revealing");
 		
 $this->email->send($email);
-        
-?>
+```        
+
 
 
 
