@@ -16,7 +16,7 @@ This module uses
 
 # Install
 ------------
-#### Every module will have its own email templates. (Replace Application with your module name) `File: module/Application/config/module.config.php`
+##### Every module will have its own email templates. (Replace Application with your module name) `module/Application/config/module.config.php`
 
 ```
 	'email' => array(
@@ -33,14 +33,14 @@ Add this structure to you module
 	module/Application/view/email/txt/your-module/*
 ```	                  
 
-#### Override the default layout with
+##### Override the default layout with
 
 ```	
 	module/Application/view/email/layout/html/layout.phtml
 	module/Application/view/email/layout/txt/layout.phtml
 ```	                  
 
-#### Setup your config under config/autoload folder `File: module.email.local.php`
+##### Setup your config under config/autoload folder `module.email.local.php`
 
 ```	
 return array(
@@ -64,7 +64,7 @@ return array(
 );
 ```	
 
-Examples
+# Examples
 ------------
 ```
 /*
