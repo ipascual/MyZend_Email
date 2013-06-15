@@ -17,7 +17,7 @@ This module uses
 Install
 ------------
 1. Every module will have its own email templates. (Replace Application with your module name)
-Add these to your module/Application/config/module.config.php
+* File: module/Application/config/module.config.php *
 ```
 	'email' => array(
 		"template_path_stack" => array(
@@ -38,7 +38,7 @@ Add this structure to you module
 	module/Application/view/email/layout/txt/layout.phtml
 ```	                  
 3. Setup your config under config/autoload folder
-* File: module.email.local.php
+* File: module.email.local.php *
 ```	
 return array(
 	'email' => array(
