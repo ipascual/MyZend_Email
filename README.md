@@ -18,6 +18,7 @@ Install
 ------------
 1. Every module will have its own email templates. (Replace Application with your module name)
 `File: module/Application/config/module.config.php`
+
 ```
 	'email' => array(
 		"template_path_stack" => array(
@@ -25,19 +26,22 @@ Install
 		),
 	),
 ```
-Add this structure to you module 
+Add this structure to you module
+ 
 ```	
 	module/Application/view/email/html/your-module/*
 	module/Application/view/email/subject/your-module/*
 	module/Application/view/email/txt/your-module/*
 ```	                  
 2. Override the default layout with
+
 ```	
 	module/Application/view/email/layout/html/layout.phtml
 	module/Application/view/email/layout/txt/layout.phtml
 ```	                  
 3. Setup your config under config/autoload folder
 `File: module.email.local.php`
+
 ```	
 return array(
 	'email' => array(
