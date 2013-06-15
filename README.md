@@ -17,7 +17,6 @@ This module uses
 Install
 ------------
 1. Every module will have its own email templates. (Replace Application with your module name)
-
 Add these to your module/Application/config/module.config.php
 ```
 	'email' => array(
@@ -26,7 +25,6 @@ Add these to your module/Application/config/module.config.php
 		),
 	),
 ```
-
 Add this structure to you module 
 ```	
 	module/Application/view/email/html/your-module/*
@@ -34,12 +32,11 @@ Add this structure to you module
 	module/Application/view/email/txt/your-module/*
 ```	                  
 
-2. Override the default layout with 
+2. Override the default layout with
 ```	
 	module/Application/view/email/layout/html/layout.phtml
 	module/Application/view/email/layout/txt/layout.phtml
 ```	                  
-
 3. Setup your config under config/autoload folder
 * File: module.email.local.php
 ```	
