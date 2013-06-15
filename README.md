@@ -17,7 +17,6 @@ This module uses
 Install
 ------------
 1. Every module will have its own email templates. (Replace Application with your module name)
-
 `File: module/Application/config/module.config.php`
 ```
 	'email' => array(
