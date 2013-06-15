@@ -9,11 +9,16 @@ MyZend Email is a ZF2 module to manage the process of sending emails with templa
 
 It encapsulates Zend\Mail\Message to keep it a simple use.
 
+This module uses 
+* html email body with templates
+* subject with templates
+* txt email body with templates (alternative to html)
+
 Install
 ------------
-Every module will have its own email templates.
+1. Every module will have its own email templates. (Replace Application with your module name)
 
-Add these to your module/YourModule/config/module.config.php
+Add these to your module/Application/config/module.config.php
 ```
 	'email' => array(
 		"template_path_stack" => array(
@@ -21,12 +26,43 @@ Add these to your module/YourModule/config/module.config.php
 		),
 	),
 ```
-Add this structure to you module module/YourModule/view/email
+
+Add this structure to you module 
 ```	
-	/html/your-module/*
-	/subject/your-module/*
-	/txt/your-module/*
+	module/Application/view/email/html/your-module/*
+	module/Application/view/email/subject/your-module/*
+	module/Application/view/email/txt/your-module/*
 ```	                  
+
+2. Override the default layout with 
+```	
+	module/Application/view/email/layout/html/layout.phtml
+	module/Application/view/email/layout/txt/layout.phtml
+```	                  
+
+3. Setup your config under config/autoload folder
+* File: module.email.local.php
+```	
+return array(
+	'email' => array(
+		"active" => true,
+		"defaults" => array(
+				"layout_name" => "layout",
+				"from_email" => "no-reply@yourproject.com",
+				"from_name" => "MyZend Project"
+		),
+		"emails" => array(
+			"support" => "ipascual@yourproject.com",
+			"admin" => "ipascual@yourproject.com"
+		),
+		'template_vars' => array(
+			"company" => "MyZend Project",
+			"slogan" => "",
+			"baseUrl" => "http://www.yourproject.com"
+		)
+	)
+);
+```	
 
 Examples
 ------------
