@@ -2,7 +2,7 @@ MyZend / Email
 =======
 Version 0.9
 
-# Introduction
+Introduction
 ------------
 
 MyZend Email is a ZF2 module to manage the process of sending emails with templates.
@@ -14,7 +14,7 @@ This module uses
 * subject with templates
 * txt email body with templates (alternative to html)
 
-# Install
+Install
 ------------
 ##### Every module will have its own email templates. (Replace Application with your module name) `module/Application/config/module.config.php`
 
@@ -64,7 +64,7 @@ return array(
 );
 ```	
 
-# Examples
+Examples
 ------------
 ```
 /*
