@@ -1,5 +1,5 @@
 {
-    "name": "MyZend/Email",
+    "name": "myzend/email",
     "description": "MyZend Email is a ZF2 module to manage the process of sending emails with templates.",
     "authors": [
         {
