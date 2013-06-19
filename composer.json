@@ -7,6 +7,14 @@
             "email": "ipascual@unexpectedit.com"
         }
     ],
+    "autoload": {
+        "psr-0": {
+            "Email": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
+    },
     "minimum-stability": "dev",
     "require": {
     }
