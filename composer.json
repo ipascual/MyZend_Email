@@ -1,6 +1,7 @@
 {
     "name": "myzend/email",
     "description": "MyZend Email is a ZF2 module to manage the process of sending emails with templates.",
+    "type" : "zf2-module",
     "authors": [
         {
             "name": "Ignacio Pascual",
@@ -14,6 +15,10 @@
         "classmap": [
             "./Module.php"
         ]
+    },
+    "require": {
+        "php":                               ">=5.3.3",
+        "zendframework/zendframework":       "2.*"
     },
     "minimum-stability": "dev",
     "require": {
