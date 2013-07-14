@@ -13,6 +13,8 @@ use Zend\Mail\Message;
 use Zend\Mime\Message as MimeMessage;
 use Zend\Mime\Part as MimePart;
 use Zend\Mail\Transport\Sendmail as SendmailTransport;
+use Zend\Mail\Transport\Smtp as SmtpTransport;
+use Zend\Mail\Transport\SmtpOptions;
 
 use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\PhpRenderer;
@@ -53,7 +55,32 @@ class EmailService
 		
         //Send email
         if($message && $this->config["active"]) {
+        	// Server SMTP config
 			$transport = new SendmailTransport();
+			// Relay SMTP
+			if($this->config["relay"]["active"]) {
+				$transport = new SmtpTransport();
+				$transportConfig = array(
+				    'name'              => "MyZend_Email",
+				    'host'              => $this->config["relay"]["host"],
+				    'connection_class'  => 'login',
+				    'connection_config' => array(
+				        'username' => $this->config["relay"]["username"],
+				        'password' => $this->config["relay"]["password"]
+					)
+				);
+				// Add port
+				if($this->config["relay"]["port"]) {
+					$transportConfig["port"] = $this->config["relay"]["port"]; 
+				}
+				// Add ssl
+				if($this->config["relay"]["ssl"]) {
+					$transportConfig["connection_config"]["ssl"] = $this->config["relay"]["ssl"]; 
+				}
+				$options   = new SmtpOptions($transportConfig);
+				$transport->setOptions($options);
+			}
+			
 			return $transport->send($message);        	
         }
     }

@@ -59,6 +59,14 @@ return array(
 			"company" => "MyZend Project",
 			"slogan" => "",
 			"baseUrl" => "http://www.yourproject.com"
+		),
+		'relay' => array(
+			'active'	=> false,
+			'host'		=> '', 
+			'port'		=> '', // it could be empty
+			'username'	=> '',
+			'password'	=> '',
+			'ssl'		=> '' // it could be empty
 		)
 	)
 );
@@ -135,6 +143,33 @@ $email->addBcc("other-copy@example.com", "Mr.Not Revealing");
 $this->email->send($email);
 ```        
 
+How to avoid email going to SPAM folder
+------------
+You could spend hours working on server side, but the easiest solution, that I've found, it's setup your web app for relaying on SMTP provider.
 
+##### MailJet (www.mailjet.com)
+```
+...
+		'relay' => array(
+			'active'	=> true,
+			'host'		=> 'in.mailjet.com', 
+			'port'		=> '',
+			'username'	=> 'bc8c7xxxxxxxxxxxxxxxxxxxxxxxx42b',
+			'password'	=> 'bc8c7xxxxxxxxxxxxxxxxxxxxxxxx42b',
+			'ssl'		=> ''
+		)
+```
 
+##### GMAIL (using your gmail account)
+```
+...
+		'relay' => array(
+			'active'	=> true,
+			'host'		=> 'smtp.gmail.com', 
+			'port'		=> '587',
+			'username'	=> 'youremail@gmail.com',
+			'password'	=> 'xxxxxxxxxx',
+			'ssl'		=> 'tls'
+		)
+```
 

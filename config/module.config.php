@@ -22,5 +22,13 @@ return array(
 			"slogan" => "Find, promotion and success",
 			"baseUrl" => "http://www.yourcompany.com/"
 		),
+		'relay' => array(
+			'active'	=> false,
+			'host'		=> '', 
+			'port'		=> '', // it could be empty
+			'username'	=> '',
+			'password'	=> '',
+			'ssl'		=> '' // it could be empty
+		)
 	),
 );
