@@ -1,6 +1,5 @@
 MyZend / Email
 =======
-Version 0.9
 
 Introduction
 ------------
