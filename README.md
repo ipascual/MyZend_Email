@@ -98,8 +98,8 @@ Install
 ```
 Email layout - Add this structure to your Application module
 ```	
-	module/Application/view/email/layout/html/layout.phtml
-	module/Application/view/email/layout/txt/layout.phtml
+	module/Application/view/email/layout/html/default.phtml
+	module/Application/view/email/layout/txt/default.phtml
 ```	                  
 ##### Module - Add these config to `module/MODULE/config/module.config.php`
 ```
@@ -135,7 +135,7 @@ return array(
 	'email' => array(
 		"active" => true,
 		"defaults" => array(
-				"layout_name" => "layout",
+				"layout_name" => "default",
 				"from_email" => "no-reply@yourproject.com",
 				"from_name" => "MyZend Project"
 		),
