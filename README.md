@@ -146,7 +146,7 @@ $this->email->send($email);
 How to avoid email going to SPAM folder
 ------------
 You could spend hours working on server side, but the easiest solution, that I've found, it's setup your web app for relaying on SMTP provider.
-
+ 
 ##### MailJet (www.mailjet.com)
 ```
 ...

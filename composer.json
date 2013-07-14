@@ -8,6 +8,14 @@
             "email": "ipascual@unexpectedit.com"
         }
     ],
+    "keywords": [
+        "zf2",
+        "Mailjet",
+        "gmail",
+        "html layout",
+        "html template",
+        "oop email"
+    ],
     "autoload": {
         "psr-0": {
             "Email": "src/"
