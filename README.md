@@ -13,65 +13,7 @@ This module uses
 * subject with templates
 * txt email body with templates (alternative to html)
 
-Install
-------------
-##### Every module will have its own email templates. (Replace Application with your module name) `module/Application/config/module.config.php`
-
-```
-	'email' => array(
-		"template_path_stack" => array(
-				__DIR__ . "/../view/email/"
-		),
-	),
-```
-Add this structure to you module
-
-```	
-	module/Application/view/email/html/your-module/*
-	module/Application/view/email/subject/your-module/*
-	module/Application/view/email/txt/your-module/*
-```	                  
-
-##### Override the default layout with
-
-```	
-	module/Application/view/email/layout/html/layout.phtml
-	module/Application/view/email/layout/txt/layout.phtml
-```	                  
-
-##### Setup your config under config/autoload folder `module.email.local.php`
-
-```	
-return array(
-	'email' => array(
-		"active" => true,
-		"defaults" => array(
-				"layout_name" => "layout",
-				"from_email" => "no-reply@yourproject.com",
-				"from_name" => "MyZend Project"
-		),
-		"emails" => array(
-			"support" => "ipascual@yourproject.com",
-			"admin" => "ipascual@yourproject.com"
-		),
-		'template_vars' => array(
-			"company" => "MyZend Project",
-			"slogan" => "",
-			"baseUrl" => "http://www.yourproject.com"
-		),
-		'relay' => array(
-			'active'	=> false,
-			'host'		=> '', 
-			'port'		=> '', // it could be empty
-			'username'	=> '',
-			'password'	=> '',
-			'ssl'		=> '' // it could be empty
-		)
-	)
-);
-```	
-
-Examples
+Usage
 ------------
 ```
 /*
@@ -142,7 +84,83 @@ $email->addBcc("other-copy@example.com", "Mr.Not Revealing");
 $this->email->send($email);
 ```        
 
-How to avoid email going to SPAM folder
+Install
+------------
+##### Every module will have its own email templates. 
+
+##### Add these config to `module/Application/config/module.config.php`
+```
+	'email' => array(
+		"template_path_stack" => array(
+				__DIR__ . "/../view/email/"
+		),
+	),
+```
+Email layout - Add this structure to your Application module
+```	
+	module/Application/view/email/layout/html/layout.phtml
+	module/Application/view/email/layout/txt/layout.phtml
+```	                  
+##### Module - Add these config to `module/MODULE/config/module.config.php`
+```
+	'email' => array(
+		"template_path_stack" => array(
+				__DIR__ . "/../view/email/"
+		),
+	),
+```
+Email templates - Add this structure to your MODULE
+```	
+	module/MODULE/view/email/html/MODULE/example.phtml
+	module/MODULE/view/email/subject/MODULE/example.phtml
+	module/MODULE/view/email/txt/MODULE/example.phtml
+```	            
+##### Now, you could easily use your layout and template
+```	
+$email = $this->email->create();
+$email->setTemplateName("MODULE/example");
+$email->addTo("ignacio@yourproject.net", "Ignacio Pascual");
+$this->email->send($email);
+
+```	
+
+      
+Config file
+------------
+
+##### Setup your config under config/autoload folder `module.email.local.php`
+
+```	
+return array(
+	'email' => array(
+		"active" => true,
+		"defaults" => array(
+				"layout_name" => "layout",
+				"from_email" => "no-reply@yourproject.com",
+				"from_name" => "MyZend Project"
+		),
+		"emails" => array(
+			"support" => "ipascual@yourproject.com",
+			"admin" => "ipascual@yourproject.com"
+		),
+		'template_vars' => array(
+			"company" => "MyZend Project",
+			"slogan" => "",
+			"baseUrl" => "http://www.yourproject.com"
+		),
+		'relay' => array(
+			'active'	=> false,
+			'host'		=> '', 
+			'port'		=> '', // it could be empty
+			'username'	=> '',
+			'password'	=> '',
+			'ssl'		=> '' // it could be empty
+		)
+	)
+);
+```	
+
+How to avoid email going to SPAM folder (SMTP relay)
 ------------
 You could spend hours working on server side, but the easiest solution, that I've found, it's setup your web app for relaying on SMTP provider.
  
