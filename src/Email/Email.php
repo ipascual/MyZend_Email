@@ -3,7 +3,6 @@
  * Email class
  *
  */
-
 namespace Email;
 
 use Zend\Mail\Message;
