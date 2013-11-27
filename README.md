@@ -222,3 +222,12 @@ You could spend hours working on server side, but the easiest solution, that I'v
 		)
 ```
 
+#### Debug mode
+Just change in your **module.email.config.php** the variable **debug**. Then \Exception will be displayed
+```php
+...
+'email' => array(
+	'debug' => true,
+...
+```
+
