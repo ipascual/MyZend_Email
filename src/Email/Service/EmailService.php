@@ -30,6 +30,8 @@ class EmailService
      */
     protected $debug = false;
 
+    protected $viewHelperManager;
+
     /**
      * __construct
      *
@@ -44,6 +46,24 @@ class EmailService
         }
     }
 
+    /**
+     * 
+     * @param type $viewHelperManager
+     * @return \Email\Service\EmailService
+     */
+    public function setViewHelperManager($viewHelperManager){
+        $this->viewHelperManager = $viewHelperManager;
+        return $this;
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function getViewHelperManager(){
+        return $this->viewHelperManager;
+    }
+    
     /**
      * Create a new email
      * 
@@ -126,6 +146,7 @@ class EmailService
 
 		//Render system
         $renderer = new PhpRenderer();
+        $renderer->setHelperPluginManager($this->getViewHelperManager());
 		$resolver = new AggregateResolver();
 		$stack = new TemplatePathStack();
 		foreach($this->config["template_path_stack"] as $path) {
@@ -142,7 +163,7 @@ class EmailService
 	        } catch (\Exception $e) {
 	        	$email->setSubject(null);
                         if($this->debug){
-                            throw new \Exception($e->getMessage());
+                            throw $e;
                         }
 	        }
 		}
@@ -158,7 +179,7 @@ class EmailService
 	        } catch (\Exception $e) {
 		    	$email->setTextContent(null);
                         if($this->debug){
-                            throw new \Exception($e->getMessage());
+                            throw $e;
                         }
 	        }
 		}
@@ -174,7 +195,7 @@ class EmailService
 	        } catch (\Exception $e) {
 	        	$email->setHtmlContent(null);
                         if($this->debug){
-                            throw new \Exception($e->getMessage());
+                            throw $e;
                         }
                     }
 		}
