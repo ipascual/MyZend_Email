@@ -25,6 +25,12 @@ class EmailService
 {
 	
     /**
+     * Debug mode
+     * @var bool 
+     */
+    protected $debug = false;
+
+    /**
      * __construct
      *
      * Set default options
@@ -33,25 +39,28 @@ class EmailService
     public function __construct ($config)
     {
     	$this->config = $config;
+        if(key_exists('debug', $config)){
+            $this->debug = $config['debug'];
+        }
     }
 
-	/**
-	 * Create a new email
-	 * 
-	 * @var $data Default template variables
-	 */
-	public function create($data = array()) {
-		return new Email($data);
-	}
+    /**
+     * Create a new email
+     * 
+     * @var $data Default template variables
+     */
+    public function create($data = array()) {
+            return new Email($data);
+    }
    
-	/**
+    /**
      * Send the constructed email
      *
      * @todo Add from name
      */
-    public function send ($email)
+    public function send (Email $email)
     {
-		$message = $this->prepare($email);
+        $message = $this->prepare($email);
 		
         //Send email
         if($message && $this->config["active"]) {
@@ -85,16 +94,16 @@ class EmailService
         }
     }
     
-	/**
-	 * Return a preview of the email
-	 */
-    public function preview($email) {
+    /**
+     * Return a preview of the email
+     */
+    public function preview(Email $email) {
     }
 	
-	/**
-	 * Prepare email to send.
-	 */
-    private function prepare($email) {
+    /**
+     * Prepare email to send.
+     */
+    private function prepare(Email $email) {
 
 		//Template Variables
         $templateVars = $this->config["template_vars"];
@@ -132,6 +141,9 @@ class EmailService
 	        	$email->setSubject($renderer->render($subjectView));
 	        } catch (\Exception $e) {
 	        	$email->setSubject(null);
+                        if($this->debug){
+                            throw new \Exception($e->getMessage());
+                        }
 	        }
 		}
 
@@ -145,6 +157,9 @@ class EmailService
 	        	$email->setTextContent($renderer->render($layoutTextView));
 	        } catch (\Exception $e) {
 		    	$email->setTextContent(null);
+                        if($this->debug){
+                            throw new \Exception($e->getMessage());
+                        }
 	        }
 		}
 		
@@ -158,7 +173,10 @@ class EmailService
 	        	$email->setHtmlContent($renderer->render($layoutHtmlView));
 	        } catch (\Exception $e) {
 	        	$email->setHtmlContent(null);
-	        }
+                        if($this->debug){
+                            throw new \Exception($e->getMessage());
+                        }
+                    }
 		}
 
         //Create Zend Message
@@ -253,7 +271,7 @@ class EmailService
 			$template = $this->config["defaults"]["template_name"];
 		}
 		$view->setTemplate("/".$type."/".$template);
-		
+                
 		return $view;
 	}       
 }
