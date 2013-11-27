@@ -10,34 +10,40 @@ use Zend\Mail\Message;
 class Email
 {
 	
+	/**
+	 * To recipients
+	 * @var array
+	 */
+	 protected $to = array();
+	 
+	 /**
+	  * Cc recipients
+	  * @var array
+	  */
+	  protected $cc = array();
+	
     /**
      * __construct
      *
      * Set default options
-     *
+     * @param array $data
      */
     public function __construct ($data = array())
     {
     	$this->setProperties($data);
     }
 
-	/**
-	 * To recipients
-	 */
-	 protected $to = array();
-	 
-	 /**
-	  * Cc recipients
-	  */
-	  protected $cc = array();
+	
 	
     /**
      * Bcc recipients
+     * @var array
      */
     protected $bcc = array();
 	
 	/**
 	 * Subject
+	 * @var string
 	 */
 	 protected $subject = "";
 
@@ -46,6 +52,7 @@ class Email
 	 * 
 	 * @param string $var Email string or User object
 	 * @param string $name of the recipient
+	 * @return \Email\Email
 	 */
 	public function addTo($var, $user = null) {
 		if(is_object($var)) {
@@ -56,6 +63,7 @@ class Email
 			//to[email] = user_name
 			$this->to[$var] = $user;	
 		}
+		return $this;
 	}
 
 	/**
@@ -63,6 +71,7 @@ class Email
 	 * 
 	 * @param string $var Email string or User object
 	 * @param string $name of the recipient
+	 * @return \Email\Email
 	 */
 	public function addCc($var, $user = null) {
 		if(is_object($var)) {
@@ -73,6 +82,7 @@ class Email
 			//to[email] = user_name
 			$this->cc[$var] = $user;	
 		}
+		return $this;
 	}
 
 	/**
@@ -80,6 +90,7 @@ class Email
 	 * 
 	 * @param string $var Email string or User object
 	 * @param string $name of the recipient
+	 * @return \Email\Email
 	 */
 	public function addBcc($var, $user = null) {
 		if(is_object($var)) {
@@ -90,6 +101,7 @@ class Email
 			//to[email] = user_name
 			$this->bcc[$var] = $user;	
 		}
+		return $this;
 	}
 
     /**
@@ -145,7 +157,7 @@ class Email
 	 * Set all values from $data to each property.
 	 * 
 	 * @param $data array set
-	 * @return $this
+	 * @return \Email\Email
 	 */	
     public function setProperties(array $data)
     {
@@ -160,7 +172,7 @@ class Email
      * E.g.: ["full_name"] => "Ignacio Pascual" 
      * 
      * Check all variables if exists the method getVariable() then is added to the Array.
-     * 
+     * @return array
      */
     public function toArray() {
     	$values = array();

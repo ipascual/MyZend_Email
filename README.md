@@ -15,7 +15,7 @@ This module uses
 
 Usage
 ------------
-```
+```php
 /*
  * Basic use
  */
@@ -24,7 +24,7 @@ $email->addTo("ignacio@yourproject.net", "Ignacio Pascual");
 $this->email->send($email);
 ```
 
-```
+```php
 /*
  * Admin mail
  */
@@ -32,7 +32,7 @@ $email = $this->email->create(array("html_content" => "this is a notice", "subje
 $this->email->send($email);
 ```
 
-```
+```php
 /*
  * Using template variables
  */
@@ -45,7 +45,7 @@ $email->addTo("ignacio@yourproject.net", "Ignacio Pascual");
 $this->email->send($email);
 ```
 
-```
+```php
 /**
  * Without templates
  */
@@ -57,7 +57,7 @@ $email->addTo("ignacio@yourproject.net", "Ignacio Pascual");
 $this->email->send($email);
 ```
 
-```
+```php
 /*
  * Optional arguments
  */
@@ -82,14 +82,46 @@ $email->addCc("copy@example.com", "Mr. Copy Recipient");
 $email->addBcc("other-copy@example.com", "Mr.Not Revealing");
 		
 $this->email->send($email);
-```        
 
 Install
 ------------
+
+##### Install module via composer.json
+
+```json
+{
+    "name": "zendframework/skeleton-application",
+    "description": "Skeleton Application for ZF2",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "framework",
+        "zf2"
+    ],
+    "minimum-stability": "dev",
+    "homepage": "http://framework.zend.com/",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "dev-master",
+        "myzend/email": "dev-master",
+    }
+}
+```
+Activate your module inside application.config.php
+```php
+<?php
+return array(
+    'modules' => array(
+        'Application',
+        'Email',
+    )
+);
+?>
+```
+
 ##### Every module will have its own email templates. 
 
 ##### Add these config to `module/Application/config/module.config.php`
-```
+```php
 	'email' => array(
 		"template_path_stack" => array(
 				__DIR__ . "/../view/email/"
@@ -116,7 +148,7 @@ Email templates - Add this structure to your MODULE
 	module/MODULE/view/email/txt/MODULE/example.phtml
 ```	            
 ##### Now, you could easily use your layout and template
-```	
+```php	
 $email = $this->email->create();
 $email->setTemplateName("MODULE/example");
 $email->addTo("ignacio@yourproject.net", "Ignacio Pascual");
@@ -130,7 +162,7 @@ Config file
 
 ##### Setup your config under config/autoload folder `module.email.local.php`
 
-```	
+```php	
 return array(
 	'email' => array(
 		"active" => true,
@@ -165,7 +197,7 @@ How to avoid email going to SPAM folder (SMTP relay)
 You could spend hours working on server side, but the easiest solution, that I've found, it's setup your web app for relaying on SMTP provider.
  
 ##### MailJet (www.mailjet.com)
-```
+```php
 ...
 		'relay' => array(
 			'active'	=> true,
@@ -178,7 +210,7 @@ You could spend hours working on server side, but the easiest solution, that I'v
 ```
 
 ##### GMAIL (using your gmail account)
-```
+```php
 ...
 		'relay' => array(
 			'active'	=> true,
@@ -188,5 +220,14 @@ You could spend hours working on server side, but the easiest solution, that I'v
 			'password'	=> 'xxxxxxxxxx',
 			'ssl'		=> 'tls'
 		)
+```
+
+#### Debug mode
+Just change in your **module.email.config.php** the variable **debug**. Then \Exception will be displayed
+```php
+...
+'email' => array(
+	'debug' => true,
+...
 ```
 

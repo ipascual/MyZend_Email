@@ -1,6 +1,7 @@
 <?php
 return array(
 	'email' => array(
+		"debug" => false,
 		"active" => true,
 		"defaults" => array(
 				"layout_name" => "default",
