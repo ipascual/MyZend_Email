@@ -1,5 +1,5 @@
 {
-    "name": "myzend/email",
+    "name": "converttt/myzendemail",
     "description": "MyZend Email is a ZF2 module to manage the process of sending emails with templates. You could also realy on MailJet/Gmail smtp.",
     "type" : "zf2-module",
     "authors": [
