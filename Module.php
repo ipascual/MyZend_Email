@@ -29,7 +29,11 @@ AutoloaderProviderInterface, ConfigProviderInterface, ServiceProviderInterface {
 			'factories' => array(
 				'email' => function ($sm) {
 					$config = $sm->get('Config');
-					return new Service\EmailService($config["email"]);
+					$emailService = new Service\EmailService($config["email"]);
+
+					$emailService->setViewHelperManager($sm->get('ViewHelperManager'));
+
+					return $emailService;
 				}
 			)
 		);
