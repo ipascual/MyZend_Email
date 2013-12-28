@@ -16,24 +16,40 @@ use Zend\Mail\Transport\Sendmail as SendmailTransport;
 use Zend\Mail\Transport\Smtp as SmtpTransport;
 use Zend\Mail\Transport\SmtpOptions;
 
+use Zend\Mvc\I18n\Translator;
+
 use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\AggregateResolver;
 use Zend\View\Resolver\TemplatePathStack;
+use Zend\View\HelperPluginManager;
 
 class EmailService
 {
-	
+	protected $config;
+
+	protected $viewHelperManager;
+
     /**
      * __construct
      *
      * Set default options
      *
      */
-    public function __construct ($config)
+    public function __construct (array $config)
     {
     	$this->config = $config;
     }
+
+	public function setViewHelperManager(HelperPluginManager $viewHelperManager)
+	{
+		$this->viewHelperManager = $viewHelperManager;
+	}
+
+	public function getViewHelperManager()
+	{
+		return $this->viewHelperManager;
+	}
 
 	/**
 	 * Create a new email
@@ -123,7 +139,8 @@ class EmailService
 			$stack->addPath($path);
 		}
 		$resolver->attach($stack);
-		$renderer->setResolver($resolver);		
+		$renderer->setResolver($resolver);
+		$renderer->setHelperPluginManager($this->getViewHelperManager());
 		
         // Subject
         if(! $email->getSubject()) {
